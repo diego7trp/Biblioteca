@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>404 | Página No Encontrada</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Reutiliza la configuración de colores principal */
+        :root {
+            --color-primary: #137fec;
+            --color-background-light: #f6f7f8;
+            --color-text-light-primary: #333333;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light font-display min-h-screen flex items-center justify-center">
+
+    <div class="text-center p-8 bg-white shadow-xl rounded-xl max-w-md w-full">
+
+        <div class="mb-4 text-primary">
+            <span class="material-symbols-outlined text-9xl">sentiment_dissatisfied</span>
+        </div>
+
+        <h1 class="text-6xl font-extrabold text-gray-900 mb-2">404</h1>
+
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">¡Página No Encontrada!</h2>
+
+        <p class="text-gray-600 mb-8">
+            Lo sentimos, la ruta que solicitaste no existe en nuestra aplicación de biblioteca.
+        </p>
+
+        <a th:href="@{/}"
+            class="inline-flex items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+            <span class="material-symbols-outlined mr-2">home</span>
+            <span>Volver al Inicio</span>
+        </a>
+    </div>
+
+</body>
+
+</html>

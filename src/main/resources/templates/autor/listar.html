@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Gestión de Autores</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,0..200"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+
+<body class="font-display">
+    <div
+        class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+        <div class="flex flex-row min-h-screen">
+
+            <div
+                class="flex flex-col border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/50 w-64 p-4 hidden md:flex">
+                <div class="flex flex-col justify-between h-full">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-3 px-3">
+                            <div
+                                class="flex items-center justify-center bg-primary text-white rounded-full size-10 font-bold">
+                                SENA
+                            </div>
+                            <div class="flex flex-col">
+                                <h1 class="text-gray-900 dark:text-white text-base font-medium leading-normal">
+                                    Biblioteca</h1>
+                                <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">Panel de
+                                    Control</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2 mt-4">
+                            <a href="/"
+                                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <span class="material-symbols-outlined">dashboard</span>
+                                <p class="text-sm font-medium leading-normal">Inicio</p>
+                            </a>
+                            <a href="/autores"
+                                class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary dark:bg-primary/20">
+                                <span class="material-symbols-outlined fill">group</span>
+                                <p class="text-sm font-medium leading-normal">Autores</p>
+                            </a>
+                            <a href="/libros"
+                                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <span class="material-symbols-outlined">book</span>
+                                <p class="text-sm font-medium leading-normal">Libros</p>
+                            </a>
+                            <a href="/libros-autoreados"
+                                class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                                <span class="material-symbols-outlined">assignment</span>
+                                <p class="text-sm font-medium leading-normal">Asignaciones</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <main class="flex-1 p-6 lg:p-10">
+                <div class="mx-auto max-w-7xl">
+
+                    <div class="flex flex-wrap justify-between gap-4 items-start">
+                        <div class="flex min-w-72 flex-col gap-2">
+                            <p class="text-gray-900 dark:text-white text-3xl font-bold leading-tight tracking-tight">
+                                Autores</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal">Gestiona
+                                los perfiles de autores, edita su información y ubicación.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between gap-4 mt-8">
+                        <div class="flex-1 min-w-0">
+                            <form th:action="@{/autores/buscar}" method="get">
+                                <label class="flex flex-col min-w-40 h-12 w-full max-w-md">
+                                    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                                        <div
+                                            class="text-gray-500 dark:text-gray-400 flex border-none bg-white dark:bg-gray-900/50 items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                            <span class="material-symbols-outlined">search</span>
+                                        </div>
+                                        <input
+                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900/50 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                                            placeholder="Buscar por nombre..." name="nombre" th:value="${param.nombre}"
+                                            type="text" />
+                                        <button type="submit" class="hidden"></button>
+                                    </div>
+                                </label>
+                            </form>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a th:href="@{/autores/nuevo}"
+                                class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-5 hover:bg-primary/90 decoration-none">
+                                <span class="material-symbols-outlined fill text-lg">add</span>
+                                <span class="truncate">Nuevo Autor</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <div
+                            class="flex overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/50">
+                            <table class="w-full">
+                                <thead class="bg-gray-50 dark:bg-black/20">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider w-2/5">
+                                            Autor</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                            ID</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                            Ciudad</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                            Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+
+                                    <tr th:if="${autores.empty}">
+                                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">No hay autores
+                                            registrados aún.</td>
+                                    </tr>
+
+                                    <tr th:each="autor : ${autores}" class="hover:bg-gray-50 dark:hover:bg-white/5">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                        th:src="@{'https://ui-avatars.com/api/?name=' + ${autor.nombre} + '+' + ${autor.apellido} + '&background=random'}"
+                                                        alt="Avatar" />
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900 dark:text-white"
+                                                        th:text="${autor.nombre} + ' ' + ${autor.apellido}">Nombre
+                                                        Completo</div>
+                                                    <div class="text-sm text-gray-500 dark:text-gray-400">Autor
+                                                        Registrado</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300"
+                                            th:text="${autor.autorId}">ID</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300"
+                                                th:text="${autor.ciudad}">
+                                                Ciudad
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <div class="flex items-center gap-2">
+                                                <a th:href="@{/autores/editar/{id}(id=${autor.autorId})}"
+                                                    class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary"
+                                                    title="Editar">
+                                                    <span class="material-symbols-outlined">edit</span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

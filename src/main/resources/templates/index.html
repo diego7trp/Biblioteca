@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dashboard | Gestión de Biblioteca</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4A90E2",
+                        "background-light": "#F4F7FA",
+                        "background-dark": "#101922",
+                        "text-light-secondary": "#617589",
+                        "text-dark-secondary": "#9EADBB",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#1A2836",
+                        "border-light": "#EAEFF4",
+                        "border-dark": "#2C3A47",
+                    },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <div class="flex flex-1">
+            <aside
+                class="flex w-64 flex-col border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4">
+                <div class="flex items-center gap-3 p-3">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-text-light-primary dark:text-text-dark-primary text-xl font-bold leading-normal">
+                        Biblioteca SENA</h1>
+                </div>
+                <nav class="mt-8 flex flex-col gap-2">
+                    <a th:href="@{/}" class="flex items-center gap-3 rounded-lg bg-primary/20 px-3 py-2 text-primary">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <p class="text-sm font-medium leading-normal">Dashboard</p>
+                    </a>
+                    <a th:href="@{/autores}"
+                        class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-text-dark-secondary hover:bg-primary/20 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">group</span>
+                        <p class="text-sm font-medium leading-normal">Autores</p>
+                    </a>
+                    <a th:href="@{/libros}"
+                        class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-text-dark-secondary hover:bg-primary/20 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">menu_book</span>
+                        <p class="text-sm font-medium leading-normal">Libros</p>
+                    </a>
+                    <a th:href="@{/libros-autoreados}"
+                        class="flex items-center gap-3 rounded-lg px-3 py-2 text-text-light-secondary dark:text-text-dark-secondary hover:bg-primary/20 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined">assignment</span>
+                        <p class="text-sm font-medium leading-normal">Asignaciones</p>
+                    </a>
+                </nav>
+            </aside>
+
+            <div class="flex flex-1 flex-col">
+                <header
+                    class="flex h-16 items-center justify-end whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark px-8">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                            data-alt="User profile picture"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqscllT76eJ6ZMRJJsVGvVHsWMMDkINvkYZYkzSAknMyg5u-haHNe_fH1QgAXPB1ILXejuJL37Z1m6A9SEKfGzSHlUPwySz4gmzvfH1wFm8Tq6nUqOdjrGNMQ7TTj_o57mhEQzIP4XeDMXj5FSd_H1sB5JpE5fu-XFwUu4hx2_jqxNtz90qR7vAkBa5Xcw00ddkEo-gmHCFPZzLVO8LT-zmP_o2dbm4Fg2tmKRNKF-pAm2onjWWgow0io8SEqihGJSYp8mYUieEqk");'>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="flex-1 p-8">
+                    <div class="flex max-w-5xl flex-col gap-8">
+                        <div class="flex flex-wrap justify-between gap-3">
+                            <div class="flex min-w-72 flex-col gap-3">
+                                <p
+                                    class="text-text-light-primary dark:text-text-dark-primary text-4xl font-black leading-tight tracking-[-0.033em]">
+                                    Bienvenido al Gestor</p>
+                                <p
+                                    class="text-text-light-secondary dark:text-text-dark-secondary text-base font-normal leading-normal">
+                                    Tu centro de control para gestionar autores, libros y sus asignaciones.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6">
+
+                            <a th:href="@{/autores}"
+                                class="flex flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 pb-4 transition-shadow hover:shadow-lg">
+                                <div
+                                    class="aspect-video w-full rounded-lg bg-cover bg-center bg-no-repeat bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-6xl">group</span>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">
+                                        Autores</p>
+                                    <p
+                                        class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">
+                                        Ver, agregar y editar perfiles de autores.</p>
+                                </div>
+                            </a>
+
+                            <a th:href="@{/libros}"
+                                class="flex flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 pb-4 transition-shadow hover:shadow-lg">
+                                <div
+                                    class="aspect-video w-full rounded-lg bg-cover bg-center bg-no-repeat bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-6xl">menu_book</span>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">
+                                        Libros</p>
+                                    <p
+                                        class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">
+                                        Gestionar el catálogo completo de libros.</p>
+                                </div>
+                            </a>
+
+                            <a th:href="@{/libros-autoreados}"
+                                class="flex flex-col gap-3 rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-4 pb-4 transition-shadow hover:shadow-lg">
+                                <div
+                                    class="aspect-video w-full rounded-lg bg-cover bg-center bg-no-repeat bg-primary/20 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-6xl">assignment</span>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">
+                                        Asignaciones</p>
+                                    <p
+                                        class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">
+                                        Asignar libros a autores y hacer seguimiento.</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

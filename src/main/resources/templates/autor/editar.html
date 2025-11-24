@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Editar Autor</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700/60 px-6 sm:px-10 lg:px-20 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+            <div class="flex items-center gap-4 text-gray-900 dark:text-white">
+                <h2 class="text-lg font-bold tracking-[-0.015em]">Gestión de Biblioteca</h2>
+            </div>
+            <a th:href="@{/autores}"
+                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                <span class="truncate">Ver Listado</span>
+            </a>
+        </header>
+        <main class="flex flex-1 justify-center py-8 px-4 sm:px-6 lg:px-8">
+            <div class="layout-content-container flex flex-col w-full max-w-4xl flex-1">
+
+                <div class="flex flex-wrap gap-2 px-4 pb-4">
+                    <a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary"
+                        th:href="@{/autores}">Autores</a>
+                    <span class="text-gray-400 dark:text-gray-500 text-sm font-medium leading-normal">/</span>
+                    <span class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Editar
+                        Autor</span>
+                </div>
+
+                <div class="flex flex-wrap justify-between gap-3 px-4 pb-6">
+                    <h1 class="text-gray-900 dark:text-white text-3xl font-black tracking-[-0.033em] min-w-72"
+                        th:text="'Editar Autor: ' + ${autor.nombre} + ' ' + ${autor.apellido}">Editar Autor: [Nombre
+                        Autor]</h1>
+                </div>
+
+                <div
+                    class="bg-white dark:bg-gray-800/50 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700/60 p-6 sm:p-8">
+
+                    <form th:action="@{/autores/guardar}" th:object="${autor}" method="post" class="space-y-8">
+
+                        <input type="hidden" th:field="*{autorId}" />
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+
+                            <div class="flex flex-col">
+                                <label class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2"
+                                    for="nombre">Nombre</label>
+                                <input
+                                    class="form-input w-full rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700/50 focus:border-primary dark:focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal"
+                                    id="nombre" type="text" th:field="*{nombre}" required />
+                            </div>
+
+                            <div class="flex flex-col">
+                                <label class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2"
+                                    for="apellido">Apellido</label>
+                                <input
+                                    class="form-input w-full rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700/50 focus:border-primary dark:focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal"
+                                    id="apellido" type="text" th:field="*{apellido}" required />
+                            </div>
+
+                            <div class="md:col-span-2 flex flex-col">
+                                <label class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2"
+                                    for="ciudad">Ciudad (Dirección)</label>
+                                <input
+                                    class="form-input w-full rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700/50 focus:border-primary dark:focus:border-primary h-12 placeholder:text-gray-400 dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal"
+                                    id="ciudad" type="text" th:field="*{ciudad}" required />
+                            </div>
+
+                        </div>
+
+                        <div
+                            class="flex justify-end items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700/60">
+                            <a th:href="@{/autores}"
+                                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-transparent text-gray-600 dark:text-gray-300 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
+                                type="button">
+                                <span class="truncate">Cancelar</span>
+                            </a>
+                            <button
+                                class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+                                type="submit">
+                                <span class="truncate">Guardar Cambios</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
